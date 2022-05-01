@@ -19,13 +19,13 @@
         <%= inspect(f) %>
         <div class="field">
             <%= label f, :first_name %>
-            <%= text_input f, :first_name, autofocus: true %>
+            <%= text_input f, :first_name, autofocus: true, phx_debounce: "blur" %>
             <%= error_tag f, :first_name %>
         </div>
 
         <div class="field">
             <%= label f, :email %>
-            <%= text_input f, :email %>
+            <%= text_input f, :email, phx_debounce: "blur" %>
             <%= error_tag f, :email %>
         </div>
 
