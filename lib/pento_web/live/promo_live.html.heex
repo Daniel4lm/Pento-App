@@ -1,0 +1,38 @@
+<section>
+
+    <h1> Hi there</h1>
+    <br>
+    <h2>Here you can send Your Promo Code to a Friend</h2>
+    <h4>
+        Enter your friend's email below and we'll send them a
+        promo code for 10% off their first game purchase!
+    </h4>
+    <!--  phx-target={@myself} -->
+    <.form
+      let={f}
+      for={@changeset}
+      id="promo-form"
+      phx-change="validate"
+      phx-submit="submit"
+    >
+    
+        <%= inspect(f) %>
+        <div class="field">
+            <%= label f, :first_name %>
+            <%= text_input f, :first_name, autofocus: true %>
+            <%= error_tag f, :first_name %>
+        </div>
+
+        <div class="field">
+            <%= label f, :email %>
+            <%= text_input f, :email %>
+            <%= error_tag f, :email %>
+        </div>
+
+        <div>
+        <%= submit "Send email", phx_disable_with: "Sending..." %>
+        </div>
+
+    </.form>
+
+</section>
