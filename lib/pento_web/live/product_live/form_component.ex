@@ -10,7 +10,60 @@ defmodule PentoWeb.ProductLive.FormComponent do
     {:ok,
      socket
      |> assign(assigns)
-     |> assign(:changeset, changeset)}
+     |> assign(:changeset, changeset)
+     |> allow_upload(:prod_image,
+       accept: ~w(.jpg .jpeg .png),
+       max_entries: 1,
+       auto_upload: true,
+       progress: &handle_progress/3
+     )}
+  end
+
+  # defp ext(entry) do
+  #   [ext | _] = MIME.extensions(entry.client_type)
+  #   ext
+  # end
+
+  defp handle_progress(:prod_image, entry, socket) do
+    # IO.inspect(entry)
+    :timer.sleep(200)
+
+    if entry.done? do
+      file_path = consume_uploaded_entry(socket, entry, &upload_static_file(&1, socket))
+
+      # {:ok, file_path} =
+      #   consume_uploaded_entry(socket, :prod_image, fn %{path: path}, _entry ->
+      #     dest = Path.join("priv/static/images", Path.basename(path))
+      #     File.cp!(path, dest)
+      #     {:ok, Routes.static_path(socket, "/images/#{Path.basename(dest)}")}
+      #   end)
+
+      # file_path = consume_uploaded_entries(socket, :prod_image, fn meta, entry ->
+      #   dest = Path.join("priv/static/images", "#{entry.uuid}.#{ext(entry)}")
+      #   File.cp!(meta.path, dest)
+      #   #IO.inspect(Path.basename(dest))
+      #   {:ok, Routes.static_path(socket, "/images/#{entry.uuid}.#{ext(entry)}")}
+      # end)
+
+      IO.puts("File path:\n")
+      IO.inspect(file_path)
+
+      socket =
+        socket
+        |> put_flash(:info, "File #{entry.client_name} uploaded")
+        |> assign(:image_upload, file_path)
+
+      IO.inspect(socket.assigns)
+      {:noreply, socket}
+    else
+      {:noreply, socket}
+    end
+  end
+
+  defp upload_static_file(%{path: path}, socket) do
+    dest = Path.join("priv/static/images", "#{Path.basename(path)}")
+    File.cp!(path, dest)
+    {:ok, Routes.static_path(socket, "/images/#{Path.basename(dest)}")}
   end
 
   @impl true
@@ -28,7 +81,10 @@ defmodule PentoWeb.ProductLive.FormComponent do
   end
 
   defp save_product(socket, :edit, product_params) do
-    case Catalog.update_product(socket.assigns.product, product_params) do
+    case Catalog.update_product(
+           socket.assigns.product,
+           Map.put(product_params, "image_upload", socket.assigns.image_upload)
+         ) do
       {:ok, _product} ->
         {:noreply,
          socket
@@ -36,12 +92,17 @@ defmodule PentoWeb.ProductLive.FormComponent do
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        {:noreply,
+         socket
+         |> assign(changeset: changeset)
+         |> put_flash(:error, "Product cannot be updated! Check error bellow")}
     end
   end
 
   defp save_product(socket, :new, product_params) do
-    case Catalog.create_product(product_params) do
+    case Catalog.create_product(
+           Map.put(product_params, "image_upload", socket.assigns.image_upload)
+         ) do
       {:ok, _product} ->
         {:noreply,
          socket
@@ -49,7 +110,10 @@ defmodule PentoWeb.ProductLive.FormComponent do
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, assign(socket, changeset: changeset)}
+        {:noreply,
+         socket
+         |> assign(changeset: changeset)
+         |> put_flash(:error, "Product cannot be created! Check error bellow")}
     end
   end
 end

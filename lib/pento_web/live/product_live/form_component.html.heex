@@ -1,6 +1,14 @@
 <div>
   <h2><%= @title %></h2>
 
+  <p class="alert alert-info" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="info"><%= live_flash(@flash, :info) %></p>
+
+  <p class="alert alert-danger" role="alert"
+    phx-click="lv:clear-flash"
+    phx-value-key="error"><%= live_flash(@flash, :error) %></p>
+
   <.form
     let={f}
     for={@changeset}
@@ -10,23 +18,41 @@
     phx-submit="save">
   
     <%= label f, :name %>
-    <%= text_input f, :name %>
+    <%= text_input f, :name, phx_debounce: "blur" %>
     <%= error_tag f, :name %>
   
     <%= label f, :description %>
-    <%= text_input f, :description %>
+    <%= text_input f, :description, phx_debounce: "blur" %>
     <%= error_tag f, :description %>
   
     <%= label f, :unit_price %>
-    <%= number_input f, :unit_price, step: "any" %>
+    <%= number_input f, :unit_price, step: "any", phx_debounce: "blur" %>
     <%= error_tag f, :unit_price %>
   
     <%= label f, :sku %>
     <%= number_input f, :sku %>
     <%= error_tag f, :sku %>
+
+    <div phx-drop-target={@uploads.prod_image.ref}>
+      <%= label f, "Upload product image" %>
+      <%= live_file_input @uploads.prod_image %>
+    </div>
   
     <div>
       <%= submit "Save", phx_disable_with: "Saving..." %>
     </div>
+
+    <%= for entry <- @uploads.prod_image.entries do %>
+      <p>
+        
+        <progress value={entry.progress} max="100"> <%= entry.client_name %> - <%= entry.progress %>% </progress>
+  
+        <button phx-target="{ @myself }"
+          phx-click="cancel-upload" phx-value-ref="{ entry.ref }">
+            cancel
+        </button>
+      </p>
+    <% end %>
+
   </.form>
 </div>
