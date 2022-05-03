@@ -9,7 +9,7 @@ defmodule PentoWeb.SurveyLive do
 
   def mount(_params, _session, socket) do
 
-
+    IO.inspect(socket)
     socket = assign(socket, demographic: get_demographic(socket))
     {:ok, socket}
   end
