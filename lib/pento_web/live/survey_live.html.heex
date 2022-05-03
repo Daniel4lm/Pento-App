@@ -1,0 +1,17 @@
+
+<section class="row">
+    <Header.header title="Welcome to our Survey tour" />
+</section>
+
+<section class="col" style="display: none;">
+    <Content.content content="Hello from a Function Component">
+        <div>Hello from a Function Component's Slot</div>
+    </Content.content>
+</section>
+
+<%= if @demographic do %>
+    <DemographicLive.Show.details demographic={@demographic} />
+<% else %>
+    <h2>Demographic Form coming soon!</h2>
+<% end %>
+

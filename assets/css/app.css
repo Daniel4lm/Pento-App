@@ -1,6 +1,13 @@
 /* This file is for your main application CSS */
 @import "./phoenix.css";
 
+
+.survey-title {
+  width: max-content;
+  margin: 2rem auto;
+  font-weight: 300;
+}
+
 /* Alerts and form errors used by phx.new */
 .alert {
   padding: 15px;
@@ -75,6 +82,7 @@
   float: right;
   font-size: 28px;
   font-weight: bold;
+  width: max-content;
 }
 
 .phx-modal-close:hover,
