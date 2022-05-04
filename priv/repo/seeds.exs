@@ -17,8 +17,10 @@ alias Pento.Catalog
 alias Pento.Catalog.Product
 
 user1 = %{username: "Daniel4lm", email: "daniel4molnar@gmail.com", password: "fdsfsUfT4k214l4WW"}
+user2 = %{username: "Danila1992Sabaton", email: "danilajurgon@gmail.com", password: "Grozdovi4444333"}
 
 # Accounts.register_user(user1)
+# Accounts.register_user(user2)
 
 products = [
   %{
@@ -41,6 +43,6 @@ products = [
   }
 ]
 
-Enum.each(products, fn product ->
-  Catalog.create_product(product)
-end)
+# Enum.each(products, fn product ->
+#   Catalog.create_product(product)
+# end)

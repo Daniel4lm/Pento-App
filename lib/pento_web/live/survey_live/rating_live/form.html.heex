@@ -1,0 +1,32 @@
+<div>
+    <section class="row">
+        <h3><b>Product item:</b> <%= @product.name %></h3>
+    </section>
+    <section class="row">
+        <.form
+            let={f}
+            for={@changeset}
+            id="form"
+            phx-target={@myself}
+            phx-change="validate"
+            phx-submit="save"
+            phx_target={@myself}
+            id={@id}
+        >
+
+            <%= hidden_input f, :user_id %>
+            <%= hidden_input f, :product_id %>
+
+            <div >
+                <div >
+                    <%= label f, "Rating" %>
+                    <%= select f, :stars, Enum.reverse(1..5) %>
+                </div>
+                    <%= error_tag f, :stars %>
+                <div>
+                    <%= submit "Save", phx_disable_with: "Saving..." %>
+                </div>
+            </div>            
+        </.form>
+    </section>
+</div>

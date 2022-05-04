@@ -1,11 +1,10 @@
-defmodule PentoWeb.SurverLive.DemographicLive.Form do
+defmodule PentoWeb.SurveyLive.DemographicLive.Form do
   use PentoWeb, :live_component
 
   alias Pento.Survey
   alias Pento.Survey.Demographic
 
   def mount(socket) do
-    # socket = assign(socket, key: value)
     {:ok, socket}
   end
 
@@ -15,6 +14,7 @@ defmodule PentoWeb.SurverLive.DemographicLive.Form do
       |> assign(assigns)
       |> set_demo_data()
       |> set_demo_changeset()
+
     {:ok, socket}
   end
 
@@ -24,5 +24,24 @@ defmodule PentoWeb.SurverLive.DemographicLive.Form do
 
   def set_demo_changeset(%{assigns: %{demographic: demographic}} = socket) do
     assign(socket, changeset: Survey.change_demographic(demographic))
+  end
+
+  def handle_event("validate", %{"demographic" => demographic_params}, socket) do
+    {:noreply, socket}
+  end
+
+  def handle_event("save", %{"demographic" => demographic_params}, socket) do
+    {:noreply, create_demographic_for_user(demographic_params, socket)}
+  end
+
+  defp create_demographic_for_user(demographic_params, socket) do
+    case Survey.create_demographic(demographic_params) do
+      {:ok, %Demographic{} = demographic} ->
+        send(self(), {:created_demographic, demographic})
+        socket
+
+      {:error, %Ecto.Changeset{} = changeset} ->
+        assign(socket, changeset: changeset)
+    end
   end
 end

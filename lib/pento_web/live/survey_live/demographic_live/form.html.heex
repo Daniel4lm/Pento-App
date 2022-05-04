@@ -3,14 +3,22 @@
         let={f}
         for={@changeset}
         phx-change="validate"
-        phx-submit="submit"
+        phx-submit="save"
         phx_target={@myself}
+        phx-target={@myself}
         id={@id}
     >
         <div>
             <%= label f, :gender %>
             <%= select f, :gender, ["male", "female", "other", "prefer not to say"] %>
             <%= error_tag f, :gender %>    
+        </div>
+        
+        <div>
+            <%= label f, :education_level %>
+            <%= select f, :education_level, ["high school", "bachelor's degree", "graduate
+    degree", "other", "prefer not to say"] %>
+            <%= error_tag f, :education_level %>    
         </div>
 
         <div>
