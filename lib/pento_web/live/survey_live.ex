@@ -53,4 +53,9 @@ defmodule PentoWeb.SurveyLive do
 
     {:noreply, socket}
   end
+
+  def handle_params(params, _url, socket) do
+    {:noreply, socket}
+  end
+
 end
