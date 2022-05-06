@@ -1,0 +1,14 @@
+<div class="font-nunitoSans">
+    <section class="row">
+        <h1 class="w-max m-auto my-6">Admin Dashboard</h1>
+    </section>
+
+    <.live_component 
+        module={PentoWeb.Admin.SurveyResultsLive}
+        id={@survey_results_component_id}
+    />
+    <.live_component
+        module={PentoWeb.Admin.UserActivityLive},
+        id={@user_activity_component_id} 
+    />
+</div>

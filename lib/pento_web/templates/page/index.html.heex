@@ -1,39 +1,42 @@
 <section class="phx-hero">
-  <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
-  <p>Peace of mind from prototype to production</p>
+  <h1 class="pb-6"><%= gettext "Welcome to %{name}!", name: "Pento-Phoenix LiveView App" %></h1>
+  <p class="pb-4">Find your next laptop for production</p>
+  <!--<a href={Routes.laptop_path(@conn, :index)}>Laptops offer</a>-->
 </section>
 
-<section class="row">
-  <article class="column">
-    <h2>Resources</h2>
+<section class="flex gap-4 font-">
+  <article class="flex flex-col flex-1 ml-0 w-full max-w-full">
+    <h3 class="mt-4">Resources</h3>
+    <hr>
     <ul>
-      <li>
+      <li class="my-2">
         <a href="https://hexdocs.pm/phoenix/overview.html">Guides &amp; Docs</a>
       </li>
-      <li>
+      <li class="my-2">
         <a href="https://github.com/phoenixframework/phoenix">Source</a>
       </li>
-      <li>
+      <li class="my-2">
         <a href="https://github.com/phoenixframework/phoenix/blob/v1.6/CHANGELOG.md">v1.6 Changelog</a>
       </li>
     </ul>
   </article>
-  <article class="column">
-    <h2>Help</h2>
+  <article class="flex flex-col flex-1 ml-0 w-full max-w-full">
+    <h3 class="mt-4">Help</h3>
+    <hr>
     <ul>
-      <li>
+      <li class="my-2">
         <a href="https://elixirforum.com/c/phoenix-forum">Forum</a>
       </li>
-      <li>
+      <li class="my-2">
         <a href="https://web.libera.chat/#elixir">#elixir on Libera Chat (IRC)</a>
       </li>
       <li>
         <a href="https://twitter.com/elixirphoenix">Twitter @elixirphoenix</a>
       </li>
-      <li>
+      <li class="my-2">
         <a href="https://elixir-slackin.herokuapp.com/">Elixir on Slack</a>
       </li>
-      <li>
+      <li class="my-2">
         <a href="https://discord.gg/elixir">Elixir on Discord</a>
       </li>
     </ul>

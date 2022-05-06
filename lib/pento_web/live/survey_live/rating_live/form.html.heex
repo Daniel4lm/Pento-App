@@ -1,8 +1,8 @@
-<div>
-    <section class="row">
-        <h3><b>Product item:</b> <%= @product.name %></h3>
+<div class="my-8 py-8 rounded-lg border border-solid border-gray-200">
+    <section class="px-6">
+        <h3 class="text-4xl"><b>Product item:</b> <%= @product.name %></h3>
     </section>
-    <section class="row">
+    <section class="w-max px-6">
         <.form
             let={f}
             for={@changeset}
@@ -13,18 +13,17 @@
             phx_target={@myself}
             id={@id}
         >
-
             <%= hidden_input f, :user_id %>
             <%= hidden_input f, :product_id %>
 
             <div >
                 <div >
-                    <%= label f, "Rating" %>
+                    <%= label f, "Rating", class: "mt-8 mx-2" %>
                     <%= select f, :stars, Enum.reverse(1..5) %>
                 </div>
                     <%= error_tag f, :stars %>
-                <div>
-                    <%= submit "Save", phx_disable_with: "Saving..." %>
+                <div class="block my-8">
+                    <input type="submit" value="Save" phx_disable_with="Saving..." >
                 </div>
             </div>            
         </.form>

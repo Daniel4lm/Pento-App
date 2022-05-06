@@ -1,0 +1,36 @@
+<div>
+    <h2 class="font-normal">Survey Results</h2>
+    <hr>
+    <ul>
+        <%= for {name, avg} <- @products_with_average_ratings do %>
+            <li><%= name %> | <%= avg %></li>
+        <% end %>
+    </ul>
+
+    <.form
+        for={:age_group_filter}
+        id={@id}
+        phx_target={@myself}
+        phx-change="age_group_change"
+        class="w-max mx-auto my-10 flex flex-col items-center gap-4"
+    >
+        <label class="text-3xl">Filter by age group:</label>
+        <select 
+            name="age_group_filter" 
+            id="age_group_filter"
+            class="w-auto"
+        >
+            <%= for age_group <-
+                ["all", "18 and under", "18 to 25", "25 to 35", "35 and up"] do %>
+                <option value={ age_group } selected = {@age_group_filter == age_group} >
+                    <%=age_group%>
+                </option>
+            <% end %>
+        </select>
+    </.form>
+
+    <div id="survey-results-chart">
+        <%= @chart_svg %>
+    </div>
+
+</div>

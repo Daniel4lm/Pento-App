@@ -6,7 +6,7 @@ defmodule PentoWeb.SurveyLive.RatingLive.Show do
 
   def wrapper(assigns) do
     ~H"""
-      <div class="survey-component-container">
+      <div class="my-8">
         <.heading products={@products} />
         <.list products={@products} current_user={@current_user}/>
       </div>
@@ -25,10 +25,12 @@ defmodule PentoWeb.SurveyLive.RatingLive.Show do
 
   def heading(assigns) do
     ~H"""
-      <h2>
+    <div class="bg-slate-100 rounded-lg p-4">
+      <h2 >
         Ratings
         <%= if ratings_complete?(@products), do: raw "&#x2611;" %>
       </h2>
+    </div>
     """
   end
 
@@ -53,14 +55,19 @@ defmodule PentoWeb.SurveyLive.RatingLive.Show do
     stars =
       filled_stars(assigns.rating.stars)
       |> Enum.concat(unfilled_stars(assigns.rating.stars))
-      |> Enum.join(" ")
+      #|> Enum.join(" ")
 
     ~H"""
-      <div>
+      <div class="my-6 mx-4">
         <h4>
-          <%= @product.name %>:<br/>
-          <%= raw stars %>
+          <%= @product.name %>:
         </h4>
+          <div class="text-sky-600 text-5xl">
+          <%= for star <- stars do %>
+            <span><%= raw star %></span>
+          <% end %>
+          </div>
+        <hr>
       </div>
     """
   end

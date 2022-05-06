@@ -1,3 +1,15 @@
+
+<.live_component 
+  module={PentoWeb.HeaderLive.Navbar}
+  id="navbar_comp"
+  current_user={@current_user}
+  links={%{
+            home: %{title: "home", path: Routes.page_path(@socket, :index)},
+            survey: %{title: "survey", path: Routes.survey_path(@socket, :index)},
+            products: %{title: "products", path: Routes.product_index_path(@socket, :index)}
+          }}
+/>
+
 <main class="container">
   <p class="alert alert-info" role="alert"
     phx-click="lv:clear-flash"

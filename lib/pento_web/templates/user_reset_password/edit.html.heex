@@ -7,16 +7,16 @@
     </div>
   <% end %>
 
-  <%= label f, :password, "New password" %>
+  <%= label f, :password, "New password", class: "mt-8 mx-2" %>
   <%= password_input f, :password, required: true %>
   <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation, "Confirm new password" %>
+  <%= label f, :password_confirmation, "Confirm new password", class: "mt-8 mx-2" %>
   <%= password_input f, :password_confirmation, required: true %>
   <%= error_tag f, :password_confirmation %>
 
-  <div>
-    <%= submit "Reset password" %>
+  <div class="my-10">
+    <input type="submit" value="Reset password">
   </div>
 </.form>
 

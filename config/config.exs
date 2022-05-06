@@ -17,6 +17,18 @@ config :pento, PentoWeb.Endpoint,
   pubsub_server: Pento.PubSub,
   live_view: [signing_salt: "eDNiP3xC"]
 
+# Tailwind CSS config
+config :tailwind,
+  version: "3.0.24",
+  default: [
+    args: ~w(
+    --config=tailwind.config.js
+    --input=css/app.css
+    --output=../priv/static/assets/app.css
+  ),
+    cd: Path.expand("../assets", __DIR__)
+  ]
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails

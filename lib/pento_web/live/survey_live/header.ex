@@ -3,7 +3,7 @@ defmodule PentoWeb.SurveyLive.Header do
 
   def header(assigns) do
     ~H"""
-        <h2 class="survey-title">
+        <h2 class="w-max m-auto my-8">
           <%= @title %>
         </h2>
     """

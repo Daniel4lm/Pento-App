@@ -48,6 +48,8 @@ defmodule PentoWeb do
         layout: {PentoWeb.LayoutView, "live.html"}
 
       unquote(view_helpers())
+      import PentoWeb.LiveHelpers
+
     end
   end
 

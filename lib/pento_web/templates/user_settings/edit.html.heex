@@ -11,16 +11,16 @@
 
   <%= hidden_input f, :action, name: "action", value: "update_email" %>
 
-  <%= label f, :email %>
+  <%= label f, :email, class: "mt-8 mx-2" %>
   <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>
 
-  <%= label f, :current_password, for: "current_password_for_email" %>
+  <%= label f, :current_password, for: "current_password_for_email", class: "mt-8 mx-2" %>
   <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_email" %>
   <%= error_tag f, :current_password %>
 
-  <div>
-    <%= submit "Change email" %>
+  <div class="my-10">
+    <input type="submit" value="Change email" >
   </div>
 </.form>
 
@@ -35,19 +35,19 @@
 
   <%= hidden_input f, :action, name: "action", value: "update_password" %>
 
-  <%= label f, :password, "New password" %>
+  <%= label f, :password, "New password", class: "mt-8 mx-2" %>
   <%= password_input f, :password, required: true %>
   <%= error_tag f, :password %>
 
-  <%= label f, :password_confirmation, "Confirm new password" %>
+  <%= label f, :password_confirmation, "Confirm new password", class: "mt-8 mx-2" %>
   <%= password_input f, :password_confirmation, required: true %>
   <%= error_tag f, :password_confirmation %>
 
-  <%= label f, :current_password, for: "current_password_for_password" %>
+  <%= label f, :current_password, for: "current_password_for_password", class: "mt-8 mx-2" %>
   <%= password_input f, :current_password, required: true, name: "current_password", id: "current_password_for_password" %>
   <%= error_tag f, :current_password %>
 
-  <div>
-    <%= submit "Change password" %>
+  <div class="my-10">
+      <input type="submit" value="Change password" >
   </div>
 </.form>

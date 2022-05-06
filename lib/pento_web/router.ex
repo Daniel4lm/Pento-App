@@ -18,7 +18,8 @@ defmodule PentoWeb.Router do
   end
 
   scope "/", PentoWeb do
-    pipe_through [:browser, :redirect_to_guess_if_user_is_authenticated]
+    #pipe_through [:browser, :redirect_to_guess_if_user_is_authenticated]
+    pipe_through :browser
 
     get "/", PageController, :index
   end
@@ -77,6 +78,8 @@ defmodule PentoWeb.Router do
 
     live_session :default, on_mount: PentoWeb.UserAuthLive do
       live "/guess", WrongLive
+
+      live "/admin-dashboard", Admin.DashboardLive
 
       live "/survey", SurveyLive, :index
 

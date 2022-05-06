@@ -17,29 +17,29 @@
     phx-change="validate"
     phx-submit="save">
   
-    <%= label f, :name %>
+    <%= label f, :name, class: "block mt-6 mx-2" %>
     <%= text_input f, :name, phx_debounce: "blur" %>
     <%= error_tag f, :name %>
   
-    <%= label f, :description %>
+    <%= label f, :description, class: "block mt-6 mx-2" %>
     <%= text_input f, :description, phx_debounce: "blur" %>
     <%= error_tag f, :description %>
   
-    <%= label f, :unit_price %>
+    <%= label f, :unit_price, class: "block mt-6 mx-2" %>
     <%= number_input f, :unit_price, step: "any", phx_debounce: "blur" %>
     <%= error_tag f, :unit_price %>
   
-    <%= label f, :sku %>
+    <%= label f, :sku, class: "block mt-6 mx-2" %>
     <%= number_input f, :sku %>
     <%= error_tag f, :sku %>
 
     <div phx-drop-target={@uploads.prod_image.ref}>
-      <%= label f, "Upload product image" %>
+      <%= label f, "Upload product image", class: "block mt-6 mx-2" %>
       <%= live_file_input @uploads.prod_image %>
     </div>
   
-    <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+    <div class="block my-10">
+      <input type="submit" value="Save" phx_disable_with="Saving..." >
     </div>
 
     <%= for entry <- @uploads.prod_image.entries do %>

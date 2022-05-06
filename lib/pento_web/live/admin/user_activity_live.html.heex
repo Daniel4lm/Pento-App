@@ -1,0 +1,14 @@
+<div class="user-activity-component">
+    <h2 class="title text-4xl text-center">Users Activity</h2>
+    <p class="py-4 text-3xl text-center">Active users currently viewing games</p>
+    <div class="py-4">
+        <%= for {product_name, users} <- @user_activity do %>
+            <h3 class="item text-4xl text-center"><%= product_name %></h3>
+            <ul class="py-4 flex flex-col items-center">
+                <%= for user <- users do %>
+                    <li class="text-3xl font-semibold"><%= user.email %> </li>
+                <% end %>
+            </ul>
+        <% end %>
+    </div>
+</div>
