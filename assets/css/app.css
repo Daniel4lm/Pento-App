@@ -118,3 +118,51 @@
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
+
+.sku-input {
+  @apply h-10 border border-cool-gray-400 rounded-l-md bg-white px-5 text-base;
+}
+
+.results {
+  @apply mt-8 bg-white shadow overflow-hidden rounded-md;
+}
+
+.results .product-link {
+  @apply border-t border-cool-gray-300 px-6 py-4;
+}
+
+.results .product-link .first-line {
+  @apply flex items-center justify-between;
+}
+
+.results .product-link .first-line .name {
+  @apply text-lg leading-5 font-medium text-indigo-600 truncate;
+}
+
+.results .product-link .first-line .sku {
+  @apply ml-2 flex-shrink-0 flex;
+}
+
+.results .product-link .first-line .sku img {
+  @apply flex-shrink-0 mr-1 h-5 w-5;
+}
+
+.results .product-link .second-line {
+  @apply mt-2 flex justify-between;
+}
+
+.results .product-link .second-line .street {
+  @apply mt-0 flex items-center text-base leading-5 text-cool-gray-400;
+}
+
+.results .product-link .second-line .street img {
+  @apply flex-shrink-0 mr-1 h-5 w-5;
+}
+
+.results .product-link .second-line .phone_number {
+  @apply mt-0 flex items-center text-sm leading-5 text-cool-gray-400;
+}
+
+.results .product-link .second-line .phone_number img {
+  @apply flex-shrink-0 mr-2 h-5 w-5;
+}

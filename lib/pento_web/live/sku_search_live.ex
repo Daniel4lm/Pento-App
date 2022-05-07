@@ -10,6 +10,7 @@ defmodule PentoWeb.SkuSearchLive do
       socket
       |> sku_struct()
       |> sku_changeset()
+      |> assign(product: nil)
 
     {:ok, socket}
   end
@@ -41,12 +42,12 @@ defmodule PentoWeb.SkuSearchLive do
 
     case SkuSearch.sku_search(String.to_integer(sku_num)) do
       %Product{} = product ->
-        # socket =
-        #   socket
-        #   |> assign(product: product)
+        socket =
+          socket
+          |> assign(product: product)
 
-        {:noreply, push_redirect(socket, to: Routes.product_show_path(socket, :show, product))}
-
+        #{:noreply, push_redirect(socket, to: Routes.product_show_path(socket, :show, product))}
+        {:noreply, socket}
       _ ->
         {:noreply, socket |> put_flash(:error, "None product found!")}
     end

@@ -15,4 +15,22 @@
             <%= submit "Search SKU's", phx_disable_with: "Searching..." %>
         </div>
     </.form>
+
+    <%= if @product do %>
+      <div class="results">
+        <%= live_redirect to: Routes.product_show_path(@socket, :show, @product) do %>
+            <div class="product-link">
+              <div class="first-line">
+                <div class="name">
+                  <%= @product.name %>
+                </div>
+                <div class="sku">
+                  <img src="images/deploy.svg">
+                  <%= @product.sku %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
 </div>
