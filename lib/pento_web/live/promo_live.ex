@@ -9,14 +9,16 @@ defmodule PentoWeb.PromoLive do
       socket
       |> set_recipient()
       |> set_changeset()
-
-    #IO.inspect(socket.assigns.changeset)
+      |> assign(loading: false)
 
     {:ok, socket}
   end
 
-  def handle_event("validate", %{"recipient" => recipient_params}, %{assigns: %{recipient: recipient}} = socket) do
-
+  def handle_event(
+        "validate",
+        %{"recipient" => recipient_params},
+        %{assigns: %{recipient: recipient}} = socket
+      ) do
     changeset =
       recipient
       |> Promo.change_recipient(recipient_params)
@@ -26,10 +28,20 @@ defmodule PentoWeb.PromoLive do
     {:noreply, socket}
   end
 
-  def handle_event("submit", %{"recipient" => recipient}, %{assigns: %{changeset: changeset}} = socket) do
+  def handle_event(
+        "submit",
+        %{"recipient" => recipient},
+        %{assigns: %{changeset: changeset}} = socket
+      ) do
+    send(self(), {:run_promo_send, recipient})
+
+    socket = assign(socket, loading: true)
+    {:noreply, socket}
+  end
+
+  def handle_info({:run_promo_send, recipient}, socket) do
     :timer.sleep(1000)
-    IO.inspect(recipient)
-    IO.inspect(changeset)
+    socket = assign(socket, loading: false)
     {:noreply, socket}
   end
 

@@ -7,7 +7,7 @@
         Enter your friend's email below and we'll send them a
         promo code for 10% off their first game purchase!
     </h4>
-    <!--  phx-target={@myself} -->
+    
     <.form
       let={f}
       for={@changeset}
@@ -15,8 +15,6 @@
       phx-change="validate"
       phx-submit="submit"
     >
-    
-        <%= inspect(f) %>
         <div class="field">
             <%= label f, :first_name %>
             <%= text_input f, :first_name, autofocus: true, phx_debounce: "blur" %>
@@ -34,5 +32,11 @@
         </div>
 
     </.form>
+
+    <%= if @loading do %>
+        <div class="loader">
+          Sending ...
+        </div>
+    <% end %>
 
 </section>
