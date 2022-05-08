@@ -42,7 +42,7 @@ products = [
     unit_price: 12.00
   }
 ]
-
+# 15222324
 # Enum.each(products, fn product ->
 #   Catalog.create_product(product)
 # end)

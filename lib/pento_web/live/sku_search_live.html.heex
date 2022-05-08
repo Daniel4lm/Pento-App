@@ -1,0 +1,40 @@
+<div class="font-nunitoSans">
+    <h1 class="text-cool-gray-700 font-[200]"> Search products by SKU number </h1>
+
+    <.form
+        let={f}
+        for={@changeset}
+        id="sku-form"
+        phx-change="sku-validate"
+        phx-submit="sku-search"
+    >
+      <div class="my-8">
+        <%= label f, "SKU number", class: " text-4xl font-[400] mt-6 mb-4 mx-2" %>
+        <%= number_input f, :sku_num, phx_debounce: "blur" %>
+      </div>
+        <%= error_tag f, :sku_num %>
+
+        <div class="block my-10">
+          <input type="submit" value="Search SKU's" phx_disable_with="Searching..." class="sku-input" >
+        </div>
+    </.form>
+
+    <%= if @product do %>
+      <h3>Results: </h3>
+      <div class="results">
+        <%= live_redirect to: Routes.product_show_path(@socket, :show, @product) do %>
+            <div class="product-link">
+              <div class="first-line">
+                <div class="name">
+                  <%= @product.name %>
+                </div>
+                <div class="sku">
+                  <img src="images/deploy.svg">
+                  SKU: <%= @product.sku %>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+</div>

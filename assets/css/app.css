@@ -808,6 +808,7 @@ tr:nth-of-type(odd) {
   margin-bottom: 20px;
   border: 1px solid transparent;
   border-radius: 4px;
+  font-size: 1em;
 }
 .alert-info {
   color: #31708f;
@@ -833,7 +834,7 @@ tr:nth-of-type(odd) {
 .invalid-feedback {
   color: #a94442;
   display: block;
-  margin: -1rem 0 2rem;
+  margin: 1rem 0 2rem;
 }
 
 /* LiveView specific classes for your customization */
@@ -1079,4 +1080,71 @@ tr:nth-of-type(odd) {
 .user-activity-component ul,
 .user-activity-component p {
   padding-left: 20px;
+}
+
+.sku-input {
+  @apply h-10 border border-cool-gray-400 rounded-l-md bg-white px-5 text-base;
+}
+
+.results {
+  @apply mt-8 bg-white hover:bg-gray-100 border border-gray-300 shadow-md overflow-hidden rounded-md hover:shadow-cool-gray-300;
+}
+
+.results .product-link {
+  @apply px-6 py-8; /*border border-cool-gray-400 */
+}
+
+.results .product-link .first-line {
+  @apply flex items-center justify-between;
+}
+
+.results .product-link .first-line .name {
+  @apply text-3xl font-medium text-indigo-600 truncate;
+}
+
+.results .product-link .first-line .sku {
+  @apply text-3xl ml-2 flex-shrink-0 flex items-center;
+}
+
+.results .product-link .first-line .sku img {
+  @apply flex-shrink-0 mr-4 h-6 w-6;
+}
+
+.results .product-link .second-line {
+  @apply mt-2 flex justify-between;
+}
+
+.results .product-link .second-line .street {
+  @apply mt-0 flex items-center text-base leading-5 text-cool-gray-400;
+}
+
+.results .product-link .second-line .street img {
+  @apply flex-shrink-0 mr-1 h-5 w-5;
+}
+
+.results .product-link .second-line .phone_number {
+  @apply mt-0 flex items-center text-sm leading-5 text-cool-gray-400;
+}
+
+.results .product-link .second-line .phone_number img {
+  @apply flex-shrink-0 mr-2 h-5 w-5;
+}
+
+.t-link {
+  position: relative;
+}
+
+
+.t-link::before {
+  position: absolute;
+  content: "";
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-image: url("../static/images/up-down-arrow-48.png");
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  width: 45px;
+  height: 45px;
 }

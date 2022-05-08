@@ -15,6 +15,16 @@ defmodule Pento.Catalog.ProductQuery.Query do
     |> preload_user_ratings(user)
   end
 
+  def sort_by(field, %{sort_order: :asc}) do
+    base()
+    |> order_by([p], asc: ^field)
+  end
+
+  def sort_by(field, %{sort_order: :desc}) do
+    base()
+    |> order_by([p], desc: ^field)
+  end
+
   def preload_user_ratings(query, user) do
     ratings_query = RatingQuery.Query.preload_user(user)
 

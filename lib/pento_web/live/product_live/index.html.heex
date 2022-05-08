@@ -15,14 +15,31 @@
 
 <div class="bg-slate-100 text-sky-500"></div>
 
-<table class="data-table font-nunitoSans">
+<table class="data-table ">
   <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Unit price</th>
+    <tr class="text-3xl">
+      <th >
+        <div class="flex justify-center items-center gap-4">
+          <%= sort_link(@socket, "Name", :name, @sort_options, "t-link") %>
+          <img class="h-8 w-8" src="images/up-down-arrow-48.png"> 
+        </div>         
+      </th>
+      <th>
+        <div class="flex justify-center items-center gap-4">
+          <%= sort_link(@socket, "Description", :description, @sort_options, "t-link") %>
+          <img class="h-8 w-8" src="images/up-down-arrow-48.png">
+        </div>
+      </th>
+      <th >
+        <div class="flex justify-center items-center gap-4">
+          <%= sort_link(@socket, "Unit price", :unit_price, @sort_options, "t-link") %>
+          <img class="h-8 w-8" src="images/up-down-arrow-48.png">
+        </div>
+      </th>
       <th>Sku</th>
-      <th></th>
+      <th>
+        
+      </th>
     </tr>
   </thead>
   <tbody id="products">

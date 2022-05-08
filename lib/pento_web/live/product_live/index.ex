@@ -6,12 +6,29 @@ defmodule PentoWeb.ProductLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-
-    socket = assign(socket,
-      products: list_products(),
-    )
+    socket =
+      socket
+      |> assign(products: list_products())
+      |> assign(sort_options: %{sort_order: :asc})
 
     {:ok, socket}
+  end
+
+  @impl true
+  def handle_params(%{"sort_by" => sort_by, "sort_order" => sort_order}, _url, socket) do
+    IO.puts("sort by ...")
+
+    sort_by = sort_by |> String.to_atom()
+    sort_order = (sort_order || "asc") |> String.to_atom()
+
+    sort_options = %{sort_order: sort_order}
+    socket =
+      socket
+      |> assign(products: Catalog.sort_products(sort_by, sort_options))
+      |> assign(sort_options: sort_options)
+
+      IO.inspect(socket)
+    {:noreply, socket}
   end
 
   @impl true
@@ -48,4 +65,23 @@ defmodule PentoWeb.ProductLive.Index do
   defp list_products do
     Catalog.list_products()
   end
+
+  def sort_link(socket, text, sort_by, options, _class) do
+    live_patch(
+      text,
+      to:
+        Routes.product_index_path(
+          socket,
+          :index,
+          %{
+            sort_by: sort_by,
+            sort_order: toggle_sort_order(options.sort_order)
+          }
+        ),
+      class: _class
+    )
+  end
+
+  def toggle_sort_order(:asc), do: :desc
+  def toggle_sort_order(:desc), do: :asc
 end

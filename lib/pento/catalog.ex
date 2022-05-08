@@ -22,6 +22,11 @@ defmodule Pento.Catalog do
     Repo.all(Product)
   end
 
+  def sort_products(sort_by, sort_options \\ %{}) do
+    ProductQuery.Query.sort_by(sort_by, sort_options)
+    |> Repo.all()
+  end
+
   def list_products_with_user_rating(user) do
     ProductQuery.Query.by_user_ratings(user)
     |> Repo.all()
@@ -57,6 +62,9 @@ defmodule Pento.Catalog do
 
   """
   def get_product!(id), do: Repo.get!(Product, id)
+
+  #def get_product_by_sku(sku_num), do: Repo.all(from p in Product, where: p.sku == ^sku_num)
+  def get_product_by_sku(sku_num), do: Repo.get_by(Product, sku: sku_num)
 
   @doc """
   Creates a product.
