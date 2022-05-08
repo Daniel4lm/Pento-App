@@ -1,9 +1,10 @@
 <section>
 
-    <h1> Hi there</h1>
+    <h1>Hi there</h1>
     <br>
-    <h2>Here you can send Your Promo Code to a Friend</h2>
-    <h4>
+    <h2 class="text-cool-gray-900 font-[200]">Here you can send Your Promo Code to a Friend</h2>
+    <br>
+    <h4 class="text-cool-gray-700 font-[300] pb-8">
         Enter your friend's email below and we'll send them a
         promo code for 10% off their first game purchase!
     </h4>
@@ -15,28 +16,27 @@
       phx-change="validate"
       phx-submit="submit"
     >
-        <div class="field">
-            <%= label f, :first_name %>
+        <div class="my-8">
+            <%= label f, :first_name, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
             <%= text_input f, :first_name, autofocus: true, phx_debounce: "blur" %>
             <%= error_tag f, :first_name %>
         </div>
 
-        <div class="field">
-            <%= label f, :email %>
+        <div class="my-8">
+            <%= label f, :email, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
             <%= text_input f, :email, phx_debounce: "blur" %>
             <%= error_tag f, :email %>
         </div>
 
-        <div>
-        <%= submit "Send email", phx_disable_with: "Sending..." %>
+        <div class="block my-10">
+            <input type="submit" value="Send email" phx_disable_with="Sending..." >
         </div>
 
     </.form>
 
     <%= if @loading do %>
-        <div class="loader">
-          Sending ...
-        </div>
+        <h4 class="w-max m-auto">Sending ...</h4>
+        <div class="loader"></div>
     <% end %>
 
 </section>

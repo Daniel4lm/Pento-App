@@ -9,7 +9,7 @@
         phx-submit="sku-search"
     >
       <div class="my-8">
-        <%= label f, "SKU number", class: " text-4xl font-[400] mt-6 mb-4 mx-2" %>
+        <%= label f, "SKU number", class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
         <%= number_input f, :sku_num, phx_debounce: "blur" %>
       </div>
         <%= error_tag f, :sku_num %>

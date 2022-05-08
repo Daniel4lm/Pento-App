@@ -17,28 +17,37 @@
     phx-change="validate"
     phx-submit="save">
   
-    <%= label f, :name, class: "block mt-6 mx-2" %>
-    <%= text_input f, :name, phx_debounce: "blur" %>
-    <%= error_tag f, :name %>
+    <div class="my-8">
+      <%= label f, :name, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+      <%= text_input f, :name, phx_debounce: "blur" %>
+      <%= error_tag f, :name %>
+    </div>
   
-    <%= label f, :description, class: "block mt-6 mx-2" %>
-    <%= text_input f, :description, phx_debounce: "blur" %>
-    <%= error_tag f, :description %>
-  
-    <%= label f, :unit_price, class: "block mt-6 mx-2" %>
-    <%= number_input f, :unit_price, step: "any", phx_debounce: "blur" %>
-    <%= error_tag f, :unit_price %>
-  
-    <%= label f, :sku, class: "block mt-6 mx-2" %>
-    <%= number_input f, :sku %>
-    <%= error_tag f, :sku %>
+    <div class="my-8">
+      <%= label f, :description, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+      <%= text_input f, :description, phx_debounce: "blur" %>
+      <%= error_tag f, :description %>
+    </div>
 
-    <div phx-drop-target={@uploads.prod_image.ref}>
-      <%= label f, "Upload product image", class: "block mt-6 mx-2" %>
+    <div class="my-8">
+      <%= label f, :unit_price, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+      <%= number_input f, :unit_price, step: "any", phx_debounce: "blur" %>
+      <%= error_tag f, :unit_price %>
+    </div>
+
+    <div class="my-8">
+      <%= label f, :sku, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+      <%= number_input f, :sku %>
+      <%= error_tag f, :sku %>
+    </div>
+
+    <div class="my-8 pl-4" phx-drop-target={@uploads.prod_image.ref}>
+      <%= label f, "Upload product image", class: "text-4xl font-[400] mt-6 mb-4" %>
       <%= live_file_input @uploads.prod_image %>
     </div>
   
-    <div class="block my-10">
+    <div class="block my-10 px-2">
+      <hr>
       <input type="submit" value="Save" phx_disable_with="Saving..." >
     </div>
 
