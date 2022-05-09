@@ -19,7 +19,18 @@
     <link phx-track-static rel="stylesheet" href={Routes.static_path(@conn, "/assets/app.css")}/>
     <script defer phx-track-static type="text/javascript" src={Routes.static_path(@conn, "/assets/app.js")}></script>
   </head>
-  <body>
+  <body class="font-nunitoSans">
+    <%= render("navbar.html",
+      conn: @conn,
+      assigns: assigns,
+      logo_title: "Pento Shop",
+      links: %{
+        home: %{title: "home", path: Routes.page_path(@conn, :index)}, 
+        products: %{title: "products", path: Routes.product_index_path(@conn, :index)},
+        survey: %{title: "survey", path: Routes.survey_path(@conn, :index)},
+        search: %{title: "search", path: Routes.live_path(@conn, PentoWeb.SkuSearchLive)},
+      })
+    %>
     <%= @inner_content %>
   </body>
 </html>

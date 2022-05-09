@@ -1,12 +1,12 @@
-<div class="header">
-      <a
-        aria-label='Company Logo'
-        href={@links.home.path}
-        class="flex items-center justify-between gap-6 transition-colors duration-300 ease-in-out text-gray-700 hover:text-sky-600"
-      >
-        <%= render "icon.html", title: "Mat Shop", 
-            style: %{hover: "icon-hover", color: "rgb(0, 110, 255)", size: 60} %>
-      </a>
+<header class="header font-nunitoSans">
+      
+      <%= live_patch to: @links.home.path, 
+          class: "flex items-center justify-between gap-6 transition-colors duration-300 ease-in-out text-gray-700 hover:text-sky-600",
+          aria_label: 'Company Logo' do %>
+        <%= render "icon.html", title: @logo_title, 
+            style: %{hover: "icon-hover", color: "rgb(0, 110, 255)", size: 60} 
+        %>
+      <% end %>
       <!-- Navigation bar -->
       <nav id="nav-bar" class="nav-bar">
           <ul id="nav-links" class="flex gap-2">
@@ -34,13 +34,12 @@
                 <%= @links.survey.title %>
               </a>
             </li>
-            <li class={link_style(@conn, "/about", "nav-link", "active")}>
+            <li class={link_style(@conn, @links.search.path, "nav-link", "active")}>
               <a
                 class="flex items-center p-0"
-                href="https://github.com/Daniel4lm/frontend_mentor_challenges"
-                target="_blank"
+                href={@links.search.path}
                 >
-                About me
+                <%= @links.search.title %>
               </a>
             </li>
             <li class="nav-link">
@@ -67,6 +66,8 @@
           </ul>
         </nav>
 
+        <%= render "_user_menu.html", @assigns %>
+
         <button
           class="hamburger"
           
@@ -76,4 +77,4 @@
           <div class="hamb-line"></div>
         </button>
 
-    </div>
+</header>

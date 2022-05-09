@@ -12,7 +12,7 @@ defmodule PentoWeb.UserAuthLive do
     if socket.assigns.current_user do
       {:cont, socket}
     else
-      {:halt, redirect(socket, to: "/login")}
+      {:halt, redirect(socket, to: "/users/log_in")}
     end
   end
 end

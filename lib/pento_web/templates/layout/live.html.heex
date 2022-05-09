@@ -1,5 +1,5 @@
 
-<.live_component 
+<%# <.live_component 
   module={PentoWeb.HeaderLive.Navbar}
   id="navbar_comp"
   current_user={@current_user}
@@ -8,7 +8,7 @@
             survey: %{title: "survey", path: Routes.survey_path(@socket, :index)},
             products: %{title: "products", path: Routes.product_index_path(@socket, :index)}
           }}
-/>
+/> %>
 
 <main class="container font-nunitoSans">
   <p class="alert alert-info" role="alert"

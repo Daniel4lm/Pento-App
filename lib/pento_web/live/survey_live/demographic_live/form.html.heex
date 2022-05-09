@@ -1,4 +1,6 @@
 <div>
+    <h3 class="my-4 text-center"> Demographic info </h3>
+    <hr>
     <.form
         let={f}
         for={@changeset}
@@ -8,29 +10,29 @@
         phx-target={@myself}
         id={@id}
     >
-        <div>
-            <%= label f, :gender %>
-            <%= select f, :gender, ["male", "female", "other", "prefer not to say"] %>
+        <div class="my-8">
+            <%= label f, :gender, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+            <%= select f, :gender, ["male", "female", "other", "prefer not to say"], class: "w-max" %>
             <%= error_tag f, :gender %>    
         </div>
         
-        <div>
-            <%= label f, :education_level %>
+        <div class="my-8">
+            <%= label f, :education_level, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
             <%= select f, :education_level, ["high school", "bachelor's degree", "graduate
-    degree", "other", "prefer not to say"] %>
+    degree", "other", "prefer not to say"], class: "w-max" %>
             <%= error_tag f, :education_level %>    
         </div>
 
-        <div>
-            <%= label f, :year_of_birth %>
-            <%= select f, :year_of_birth, Enum.reverse(1900..2022) %>
+        <div class="my-8">
+            <%= label f, :year_of_birth, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+            <%= select f, :year_of_birth, Enum.reverse(1900..2022), class: "w-max" %>
             <%= error_tag f, :year_of_birth %>  
         </div>
 
         <%= hidden_input f, :user_id %>
 
-        <div>
-            <%= submit "Save", phx_disable_with: "Saving data..." %>
+        <div class="block my-10">
+            <input type="submit" value="Save" phx_disable_with="Saving data..." >
         </div>
     </.form>
 </div>
