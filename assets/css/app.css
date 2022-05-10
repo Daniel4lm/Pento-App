@@ -1212,3 +1212,10 @@ tr:nth-of-type(odd) {
   width: 45px;
   height: 45px;
 }
+
+.answer {
+  display: grid;
+	grid-template-columns: 1fr 1fr;
+	padding: 0.5em;
+	border-bottom: 1px solid lightgrey;
+}

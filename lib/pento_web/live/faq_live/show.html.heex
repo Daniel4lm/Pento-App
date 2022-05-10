@@ -1,0 +1,67 @@
+<h1>Show Faq</h1>
+
+<%= if @live_action in [:edit] do %>
+  <.modal return_to={Routes.faq_show_path(@socket, :show, @faq)}>
+    <.live_component
+      module={PentoWeb.FaqLive.FormComponent}
+      id={@faq.id}
+      title={@page_title}
+      action={@live_action}
+      faq={@faq}
+      return_to={Routes.faq_show_path(@socket, :show, @faq)}
+    />
+  </.modal>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @faq.title %>
+  </li>
+
+  <li>
+    <strong>Question:</strong>
+    <%= @faq.question %>
+  </li>
+  
+  <li>
+    <strong>Likes:</strong>
+    <%= Enum.count(@faq.votes) %>
+  </li>
+  
+  <li>
+    <button 
+        phx-click="add_like" 
+        phx-value-faq_id={@faq.id}
+        phx-value-user_id={@current_user.id}
+        disabled={@already_voted}
+        >
+      Vote <%= raw "&#128077;" %>
+    </button>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.faq_show_path(@socket, :edit, @faq), class: "button" %></span> |
+<span><%= live_redirect "Back", to: Routes.faq_index_path(@socket, :index) %></span>
+
+<%= if length(@answers) > 0 do %>
+  <%= for answer <- @answers do %>
+    <AnswerLive.Show.details 
+      answer={answer} 
+      current_user={@current_user}
+    />
+  <% end %>
+<% end %>
+
+<%= if !@already_answered do %>
+  <div>
+    <.live_component 
+        module={AnswerLive.Form}
+        id={"answer-form-#{@faq.id}"}
+        current_user={@current_user}
+        faq={@faq}
+    />
+  </div>
+<% end %>
