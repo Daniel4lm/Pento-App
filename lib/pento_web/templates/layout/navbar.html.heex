@@ -11,44 +11,35 @@
       <nav id="nav-bar" class="nav-bar">
           <ul id="nav-links" class="flex gap-2">
             <li class={link_style(@conn, @links.home.path, "nav-link", "active")}>
-              <a 
-                class="flex items-center p-0" 
-                href={@links.home.path}
-              >
-                <%= @links.home.title %>
-              </a>
+              <%= link @links.home.title, to: @links.home.path,
+                  class: "flex items-center p-0" %>
             </li>
             <li class={link_style(@conn, @links.products.path, "nav-link", "active")}>
-              <a
-                class="flex items-center p-0"
-                href={@links.products.path}
-                >
-                <%= @links.products.title %>
-              </a>
+              <%= link @links.products.title, to: @links.products.path,
+                  class: "flex items-center p-0" %>
             </li>
             <li class={link_style(@conn, @links.survey.path, "nav-link", "active")}>
-              <a
-                class="flex items-center p-0"
-                href={@links.survey.path}
-                >
-                <%= @links.survey.title %>
-              </a>
+              <%= link @links.survey.title, to: @links.survey.path,
+                  class: "flex items-center p-0" %>
             </li>
             <li class={link_style(@conn, @links.search.path, "nav-link", "active")}>
-              <a
-                class="flex items-center p-0"
-                href={@links.search.path}
-                >
-                <%= @links.search.title %>
-              </a>
+              <%= link @links.search.title, to: @links.search.path,
+                  class: "flex items-center p-0" %>
             </li>
-            <li class={link_style(@conn, @links.support.path, "nav-link", "active")}>
-              <a
-                class="flex items-center p-0"
-                href={@links.support.path}
-                >
-                <%= @links.support.title %>
+            <li class={link_style(@conn, @links.support.path, "nav-link hover", "active")}>
+              <a class="flex items-center p-0">
+                Support
               </a>
+              <ul class="nav-link submenu">
+                <li class={link_style(@conn, @links.support.path, "nav-link", "active")}>
+                    <%= link "FAQ", to: @links.support.path,
+                        class: "flex items-center p-0" %>
+                </li>
+                <li class={link_style(@conn, @links.admin_dashboard.path, "nav-link", "active")}>
+                    <%= link @links.admin_dashboard.title, to: @links.admin_dashboard.path,
+                        class: "flex items-center p-0" %>
+                </li>
+              </ul>
             </li>
             
           </ul>

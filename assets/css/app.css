@@ -829,7 +829,21 @@ tr:nth-of-type(odd) {
 }
 
 .nav-link {
-  @apply text-1.1 rounded-xl py-4 px-4 tracking-wide transition-colors duration-200 ease-in-out text-[#7e7e7e] hover:text-[#1d1d1d];
+  @apply relative text-1.1 rounded-xl py-4 px-4 tracking-wide transition-colors duration-200 ease-in-out text-[#7e7e7e] hover:text-[#1d1d1d];
+}
+
+.submenu {
+  position: absolute;
+  display: none;
+  left: 0;
+  top: 100%;
+  border: 1px solid #606c76;
+  background-color: white;
+  z-index: 100;
+}
+
+.nav-link.hover:hover .submenu {
+  display: block
 }
 
 .nav-link > a > svg {
@@ -1065,7 +1079,7 @@ tr:nth-of-type(odd) {
 .exc-tick text {
   fill: grey;
   stroke: none;
-  font-size: 1.3rem;
+  font-size: 1.0rem;
 }
 
 .exc-grid {
@@ -1084,14 +1098,14 @@ tr:nth-of-type(odd) {
 
 .exc-title {
   fill: darkslategray;
-  font-size: 2.3rem;
+  font-size: 2rem;
   stroke: none;
   padding-bottom: 10px;
 }
 
 .exc-subtitle {
   fill: darkgrey;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   stroke: none;
 }
 
@@ -1324,7 +1338,6 @@ tr:nth-of-type(odd) {
 }
 
 /* product page */
-
 
 .item-container {
   padding: 1rem;

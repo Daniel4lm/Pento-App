@@ -30,6 +30,7 @@
         survey: %{title: "survey", path: Routes.survey_path(@conn, :index)},
         search: %{title: "search", path: Routes.live_path(@conn, PentoWeb.SkuSearchLive)},
         support: %{title: "Support", path: Routes.faq_index_path(@conn, :index)},
+        admin_dashboard: %{title: "Admin dashboard", path: Routes.live_path(@conn, PentoWeb.Admin.DashboardLive)},
       })
     %>
     <%= @inner_content %>

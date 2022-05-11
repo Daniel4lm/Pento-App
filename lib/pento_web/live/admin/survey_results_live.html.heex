@@ -1,11 +1,14 @@
 <div>
-    <h2 class="font-normal">Survey Results</h2>
+    <h2 class="text-[1.8em] font-[200] text-center">Survey Results</h2>
     <hr>
-    <ul>
+    <ul class="flex flex-col w-max m-auto">
         <%= for {name, avg} <- @products_with_average_ratings do %>
-            <li><%= name %> | <%= avg %></li>
+            <li class="bg-slate-200 rounded-lg p-4 my-2 text-3xl">
+            <p><%= name %> - <strong> <%= avg %></strong></p>
+        </li>
         <% end %>
     </ul>
+    <hr>
 
     <.form
         for={:age_group_filter}
@@ -14,7 +17,7 @@
         phx-change="age_group_change"
         class="w-max mx-auto my-10 flex flex-col items-center gap-4"
     >
-        <label class="text-3xl">Filter by age group:</label>
+        <label class="text-3xl font-semibold">Filter by age group:</label>
         <select 
             name="age_group_filter" 
             id="age_group_filter"
