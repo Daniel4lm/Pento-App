@@ -1,4 +1,5 @@
-<h1>Listing Faqs</h1>
+<h2 class="font-bold">FAQ support</h2>
+<hr>
 
 <%= if @live_action in [:new, :edit] do %>
   <.modal return_to={Routes.faq_index_path(@socket, :index)}>
@@ -13,21 +14,15 @@
   </.modal>
 <% end %>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Question</th>
+<h2 class="faq-title text-center md:text-left">Find the answers to Frequently asked questions about our games</h2>
 
-      <th></th>
-    </tr>
-  </thead>
+<table class="faq-table text-3xl">
+  
   <tbody id="faqs">
     <%= for faq <- @faqs do %>
       <tr id={"faq-#{faq.id}"}>
         <td><%= live_redirect faq.title, to: Routes.faq_show_path(@socket, :show, faq) %></td>
-        <td><%= faq.question %></td>
-
+        <!--<td><%= faq.question %></td>-->
         <td>
           <span><%= live_redirect "Show", to: Routes.faq_show_path(@socket, :show, faq) %></span>
           <span><%= live_patch "Edit", to: Routes.faq_index_path(@socket, :edit, faq) %></span>
@@ -38,4 +33,6 @@
   </tbody>
 </table>
 
-<span><%= live_patch "New Faq", to: Routes.faq_index_path(@socket, :new) %></span>
+<div class="my-6">
+  <span><%= live_patch "New Faq", to: Routes.faq_index_path(@socket, :new), class: "link-btn" %></span>
+</div>

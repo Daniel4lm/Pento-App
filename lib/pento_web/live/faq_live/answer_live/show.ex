@@ -7,14 +7,17 @@ defmodule PentoWeb.FaqLive.AnswerLive.Show do
     #IO.inspect(assigns)
     ~H"""
       <div class="answer">
-        <h2> <%= @answer.username %> </h2>
-        <h2> <%= @answer.content %> </h2>
-        <%= if @current_user.username == @answer.username do %>
-          <button
-            phx-click="delete_answer"
-            phx-value-answer_id={@answer.id}
-            > Delete </button>
-        <% end %>
+
+          <h4> <%= @answer.username %> </h4>
+          <p> <%= @answer.content %> </p>
+          <div class="action">
+            <%= if @current_user.username == @answer.username do %>
+              <button class="delete"
+                phx-click="delete_answer"
+                phx-value-answer_id={@answer.id}
+                > Delete </button>
+            <% end %>
+          </div>
       </div>
     """
   end

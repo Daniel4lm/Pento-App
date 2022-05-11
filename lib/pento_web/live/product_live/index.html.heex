@@ -62,7 +62,5 @@
 </table>
 
 <div class="action-bar sticky bottom-6 mt-10 md:relative bg-[#f2f5f6] md:bg-transparent rounded-sm p-4">
-  <%= live_patch("New Laptop", to: Routes.product_index_path(@socket, :new), 
-    class: "block w-max px-8 py-3 uppercase border bg-transparent rounded-lg border-[#0069d9] hover:bg-[#606c76] hover:border-[#606c76] hover:text-white")
-  %>
+  <%= live_patch("New Product", to: Routes.product_index_path(@socket, :new), class: "link-btn") %>
 </div>

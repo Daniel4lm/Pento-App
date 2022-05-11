@@ -9,16 +9,20 @@
     phx-change="validate"
     phx-submit="save">
   
-    <%= label f, :title %>
-    <%= text_input f, :title %>
-    <%= error_tag f, :title %>
+    <div class="my-8">
+      <%= label f, :title, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+      <%= text_input f, :title %>
+      <%= error_tag f, :title %>
+    </div>
+
+    <div class="my-8">
+      <%= label f, :question, class: "text-4xl font-[400] mt-6 mb-4 mx-2" %>
+      <%= textarea f, :question %>
+      <%= error_tag f, :question %>
+    </div>
   
-    <%= label f, :question %>
-    <%= text_input f, :question %>
-    <%= error_tag f, :question %>
-  
-    <div>
-      <%= submit "Save", phx_disable_with: "Saving..." %>
+    <div class="block my-10 px-2">
+      <input type="submit" value="Save" phx_disable_with="Saving..." >
     </div>
   </.form>
 </div>

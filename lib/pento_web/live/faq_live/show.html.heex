@@ -1,4 +1,3 @@
-<h1>Show Faq</h1>
 
 <%= if @live_action in [:edit] do %>
   <.modal return_to={Routes.faq_show_path(@socket, :show, @faq)}>
@@ -13,24 +12,30 @@
   </.modal>
 <% end %>
 
+<span>
+  <%= live_redirect "Back", to: Routes.faq_index_path(@socket, :index), 
+        class: "px-2 text-3xl font-medium" 
+  %>
+</span>
+<hr>
+
 <ul>
 
-  <li>
-    <strong>Title:</strong>
-    <%= @faq.title %>
+  <li class="text-4xl py-4 flex gap-4">
+    <p class="pb-4 font-semibold">Topic:</p>
+    <p><%= @faq.title %></p>
   </li>
 
-  <li>
-    <strong>Question:</strong>
-    <%= @faq.question %>
+  <li class="text-4xl">
+    <p class="pb-4 font-semibold">Question:</p>
+    <textarea disabled><%= @faq.question %></textarea>
   </li>
   
-  <li>
-    <strong>Likes:</strong>
-    <%= Enum.count(@faq.votes) %>
-  </li>
-  
-  <li>
+  <li class="flex flex-wrap gap-5 py-8">
+    <div class="votes-count">
+      <strong>Likes: <%= Enum.count(@faq.votes) %></strong>
+    </div>
+    
     <button 
         phx-click="add_like" 
         phx-value-faq_id={@faq.id}
@@ -39,14 +44,16 @@
         >
       Vote <%= raw "&#128077;" %>
     </button>
+
+    <span><%= live_patch "Edit", to: Routes.faq_show_path(@socket, :edit, @faq), class: "button" %></span>
+
   </li>
 
 </ul>
 
-<span><%= live_patch "Edit", to: Routes.faq_show_path(@socket, :edit, @faq), class: "button" %></span> |
-<span><%= live_redirect "Back", to: Routes.faq_index_path(@socket, :index) %></span>
 
 <%= if length(@answers) > 0 do %>
+  <h3 class="pt-10 py-2 px-2 border-b border-gray-300">Answers by users:</h3>
   <%= for answer <- @answers do %>
     <AnswerLive.Show.details 
       answer={answer} 

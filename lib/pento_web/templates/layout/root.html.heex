@@ -29,6 +29,7 @@
         products: %{title: "products", path: Routes.product_index_path(@conn, :index)},
         survey: %{title: "survey", path: Routes.survey_path(@conn, :index)},
         search: %{title: "search", path: Routes.live_path(@conn, PentoWeb.SkuSearchLive)},
+        support: %{title: "Support", path: Routes.faq_index_path(@conn, :index)},
       })
     %>
     <%= @inner_content %>
