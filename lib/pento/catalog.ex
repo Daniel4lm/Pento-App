@@ -84,10 +84,22 @@ defmodule Pento.Catalog do
     |> Repo.insert()
   end
 
-  def markdown_product(%Product{} = product, amount \\ 0) do
+  @doc """
+  Change the price of product.
+
+  ## Examples
+
+      iex> markdown_product(product, :increase, 44)
+      {:ok, %Product{}}
+
+      iex> markdown_product(product, :increase, bad_value)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def markdown_product(%Product{} = product, oper, amount \\ 0) do
     product
     |> Product.changeset()
-    |> Product.price_changeset(amount)
+    |> Product.price_changeset(oper, amount)
     |> Repo.update()
   end
 

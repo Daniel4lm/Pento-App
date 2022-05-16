@@ -28,19 +28,26 @@ defmodule Pento.Catalog.Product do
     |> validate_number(:unit_price, greater_than: 0.0, message: "Price must be greater than zero")
   end
 
-  def price_changeset(changeset, amount \\ 0) do
+  def price_changeset(changeset, operat, amount \\ 0) do
     changeset
-    |> decrease_price(amount)
+    |> change_price(operat,amount)
   end
 
-  defp decrease_price(changeset, amount \\ 0) do
+  defp change_price(changeset, operat, amount \\ 0) do
 
     prod_price = get_field(changeset, :unit_price)
 
-    if (prod_price - amount) > 0 do
-      put_change(changeset, :unit_price, (prod_price - amount))
-    else
-      changeset
+    real_amount = if amount < 0 do amount * -1 else amount end
+
+    case operat do
+      :decrease ->
+        if (prod_price - real_amount) > 0 do
+          put_change(changeset, :unit_price, (prod_price - real_amount))
+        else
+          changeset
+        end
+      :increase ->
+        put_change(changeset, :unit_price, (prod_price + real_amount))
     end
 
   end

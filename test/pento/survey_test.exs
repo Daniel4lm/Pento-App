@@ -2,6 +2,20 @@ defmodule Pento.SurveyTest do
   use Pento.DataCase
 
   alias Pento.Survey
+  alias Pento.Accounts
+  import Pento.AccountsFixtures
+
+  @genders ["male", "female", "other", "prefer not to say"]
+
+  @education_level [
+    "high school",
+    "bachelor's degree",
+    "graduate degree",
+    "other",
+    "prefer not to say"
+  ]
+
+  # :random.uniform(5)
 
   describe "demographics" do
     alias Pento.Survey.Demographic
@@ -21,11 +35,21 @@ defmodule Pento.SurveyTest do
     end
 
     test "create_demographic/1 with valid data creates a demographic" do
-      valid_attrs = %{gender: "some gender", year_of_birth: 42}
+
+      %{id: id} = user = user_fixture(%{id: 1, email: "daniel4molnar@gmail.com"})
+      ruser = Accounts.get_user!(id)
+
+      valid_attrs = %{
+        gender: "female",
+        year_of_birth: 1990,
+        education_level: "high school",
+        user_id: ruser.id
+      }
 
       assert {:ok, %Demographic{} = demographic} = Survey.create_demographic(valid_attrs)
-      assert demographic.gender == "some gender"
-      assert demographic.year_of_birth == 42
+      assert demographic.gender == "female"
+      assert demographic.year_of_birth == 1990
+      assert demographic.education_level == "high school"
     end
 
     test "create_demographic/1 with invalid data returns error changeset" do
@@ -34,11 +58,13 @@ defmodule Pento.SurveyTest do
 
     test "update_demographic/2 with valid data updates the demographic" do
       demographic = demographic_fixture()
-      update_attrs = %{gender: "some updated gender", year_of_birth: 43}
+      update_attrs = %{gender: "male", year_of_birth: 2002}
 
-      assert {:ok, %Demographic{} = demographic} = Survey.update_demographic(demographic, update_attrs)
-      assert demographic.gender == "some updated gender"
-      assert demographic.year_of_birth == 43
+      assert {:ok, %Demographic{} = demographic} =
+               Survey.update_demographic(demographic, update_attrs)
+
+      assert demographic.gender == "male"
+      assert demographic.year_of_birth == 2002
     end
 
     test "update_demographic/2 with invalid data returns error changeset" do
@@ -61,10 +87,12 @@ defmodule Pento.SurveyTest do
 
   describe "ratings" do
     alias Pento.Survey.Rating
-
     import Pento.SurveyFixtures
+    alias Pento.Catalog
+    alias Pento.Catalog.Product
+    import Pento.CatalogFixtures
 
-    @invalid_attrs %{stars: nil}
+    @invalid_attrs %{stars: nil, prod_id: 1}
 
     test "list_ratings/0 returns all ratings" do
       rating = rating_fixture()
@@ -77,10 +105,17 @@ defmodule Pento.SurveyTest do
     end
 
     test "create_rating/1 with valid data creates a rating" do
-      valid_attrs = %{stars: 42}
+
+      %{id: id} = user = user_fixture(%{id: 1, email: "daniel4molnar@gmail.com"})
+      ruser = Accounts.get_user!(id)
+
+      prod_attrs = %{description: "some description", name: "some name", sku: 42, unit_price: 120.5}
+      assert {:ok, %Product{} = product} = Catalog.create_product(prod_attrs)
+
+      valid_attrs = %{stars: 4, user_id: ruser.id, product_id: product.id}
 
       assert {:ok, %Rating{} = rating} = Survey.create_rating(valid_attrs)
-      assert rating.stars == 42
+      assert rating.stars == 4
     end
 
     test "create_rating/1 with invalid data returns error changeset" do
@@ -89,10 +124,10 @@ defmodule Pento.SurveyTest do
 
     test "update_rating/2 with valid data updates the rating" do
       rating = rating_fixture()
-      update_attrs = %{stars: 43}
+      update_attrs = %{stars: 4}
 
       assert {:ok, %Rating{} = rating} = Survey.update_rating(rating, update_attrs)
-      assert rating.stars == 43
+      assert rating.stars == 4
     end
 
     test "update_rating/2 with invalid data returns error changeset" do

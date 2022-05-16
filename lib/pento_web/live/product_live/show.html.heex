@@ -33,19 +33,28 @@
           <p class="item-desc my-4"><strong>Description: </strong><%= @product.description %></p>
           <p class="item-price my-4"><strong>Unit price: </strong><%= @product.unit_price %></p>
           <p class="item-sku my-4"><strong>SKU: </strong><%= @product.sku %></p>
-          <div class="shop-opt">
-              <div class="item-opt-item">
-                  <label class="label" htmlFor="quantity">QUANTITY</label>
-                  <select
-                      id="quantity"
-                      name="quantity"
-                      class="shopSelect"
-                      
-                  >
-                    
-                  </select>
-              </div>
-          </div>            
+
+          <h4 class="mt-6">Change price: </h4>
+          <div class="flex items-center gap-4 my-4">
+            <input 
+              type="button" 
+              value="-" 
+              phx-click="dec-price"
+            >
+            <.form
+              for={:price_change}
+              id="product-form"
+              phx-change="handle-price-change"
+            >
+              <input type="number" value={@price_change} name="price_change" >
+            </.form>
+            <input 
+              type="button" 
+              value="+" 
+              phx-click="inc-price"
+            >
+          </div>
+
       </div>
   </div>
 

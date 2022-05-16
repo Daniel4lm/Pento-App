@@ -3,6 +3,8 @@ defmodule PentoWeb.ProductLive.FormComponent do
 
   alias Pento.Catalog
 
+  @resource_path "priv/static/images";
+
   @impl true
   def update(%{product: product} = assigns, socket) do
     changeset = Catalog.change_product(product)
@@ -31,22 +33,12 @@ defmodule PentoWeb.ProductLive.FormComponent do
     if entry.done? do
       file_path = consume_uploaded_entry(socket, entry, &upload_static_file(&1, socket))
 
-      # {:ok, file_path} =
-      #   consume_uploaded_entry(socket, :prod_image, fn %{path: path}, _entry ->
-      #     dest = Path.join("priv/static/images", Path.basename(path))
+      # file_path =
+      #   consume_uploaded_entry(socket, entry, fn %{path: path} ->
+      #     dest = Path.join(Application.app_dir(:pento, "priv/static/images"), Path.basename(path))
       #     File.cp!(path, dest)
       #     {:ok, Routes.static_path(socket, "/images/#{Path.basename(dest)}")}
-      #   end)
-
-      # file_path = consume_uploaded_entries(socket, :prod_image, fn meta, entry ->
-      #   dest = Path.join("priv/static/images", "#{entry.uuid}.#{ext(entry)}")
-      #   File.cp!(meta.path, dest)
-      #   #IO.inspect(Path.basename(dest))
-      #   {:ok, Routes.static_path(socket, "/images/#{entry.uuid}.#{ext(entry)}")}
       # end)
-
-      IO.puts("File path:\n")
-      IO.inspect(file_path)
 
       socket =
         socket
@@ -61,7 +53,7 @@ defmodule PentoWeb.ProductLive.FormComponent do
   end
 
   defp upload_static_file(%{path: path}, socket) do
-    dest = Path.join("priv/static/images", "#{Path.basename(path)}")
+    dest = Path.join(Application.app_dir(:pento, @resource_path), Path.basename(path))
     File.cp!(path, dest)
     {:ok, Routes.static_path(socket, "/images/#{Path.basename(dest)}")}
   end

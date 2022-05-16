@@ -7,8 +7,7 @@ defmodule PentoWeb.ProductLive.Show do
 
   @impl true
   def mount(_params, _session, socket) do
-    # IO.inspect(socket.assigns)
-    {:ok, socket}
+    {:ok, socket |> assign(price_change: 0.0)}
   end
 
   @impl true
@@ -35,4 +34,28 @@ defmodule PentoWeb.ProductLive.Show do
   end
 
   def maybe_track_user(product, socket), do: nil
+
+  def handle_event("handle-price-change", %{"price_change" => price_change}, socket) do
+    {:noreply, socket |> assign(price_change: price_change)}
+  end
+
+  def handle_event(
+        "dec-price",
+        _,
+        %{assigns: %{product: product, price_change: price_change}} = socket
+      ) do
+
+    {:ok, markdown_product} = Catalog.markdown_product(product, :decrease, String.to_float(price_change))
+    {:noreply, socket |> assign(product: markdown_product)}
+  end
+
+  def handle_event(
+        "inc-price",
+        _,
+        %{assigns: %{product: product, price_change: price_change}} = socket
+      ) do
+
+    {:ok, markdown_product} = Catalog.markdown_product(product, :increase, String.to_float(price_change))
+    {:noreply, socket |> assign(product: markdown_product)}
+  end
 end

@@ -16,7 +16,6 @@ defmodule PentoWeb.ProductLive.Index do
 
   @impl true
   def handle_params(%{"sort_by" => sort_by, "sort_order" => sort_order}, _url, socket) do
-    IO.puts("sort by ...")
 
     sort_by = sort_by |> String.to_atom()
     sort_order = (sort_order || "asc") |> String.to_atom()

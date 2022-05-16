@@ -1,4 +1,5 @@
-<h1>Log in</h1>
+<h1 class="my-6">Log in</h1>
+<hr>
 
 <.form let={f} for={@conn} action={Routes.user_session_path(@conn, :create)} as={:user}>
   <%= if @error_message do %>
@@ -7,18 +8,25 @@
     </div>
   <% end %>
 
-  <%= label f, :email, class: "mt-8 mx-2" %>
-  <%= email_input f, :email, required: true %>
-
-  <%= label f, :password, class: "mt-8 mx-2" %>
-  <%= password_input f, :password, required: true %>
-
-  <div class="flex items-center gap-4 mt-8">
-  <%= label f, :remember_me, "Keep me logged in for 60 days", class: "my-0 mx-2" %>
-  <%= checkbox f, :remember_me %>
+  <div class="my-8">
+    <%= label f, :email, class: "text-4xl font-[400] mt-6 mb-4" %>
+    <%= email_input f, :email, required: true %>
   </div>
 
-  <div class="my-10">
+  <div class="my-8">
+    <%= label f, :password, class: "text-4xl font-[400] mt-6 mb-4" %>
+    <%= password_input f, :password, required: true %>
+  </div>
+
+  <div class="flex items-center text-4xl font-[400] gap-4 mt-8">
+    <label class="check-toggle my-0 mx-2">
+      <%= checkbox f, :remember_me, id: "checkbox" %>
+      <span class="ball"></span>
+      <span class="text">Keep me logged in for 60 days</span>
+    </label>
+  </div>
+
+  <div class="my-10 px-2">
     <input type="submit" value="Log in">
   </div>
 </.form>

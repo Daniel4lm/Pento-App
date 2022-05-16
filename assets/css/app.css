@@ -2,6 +2,8 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
+@import "./custom.css";
+
 /* This file is for your main application CSS */
 /*@import "./custom.css";*/
 
@@ -1219,6 +1221,40 @@ tr:nth-of-type(odd) {
 
 .results .product-link .second-line .phone_number img {
   @apply flex-shrink-0 mr-2 h-5 w-5;
+}
+
+#checkbox {
+  @apply hidden;
+}
+
+.check-toggle {
+  @apply block w-[60px] h-[32px] border-2 border-[#0069d9] rounded-[30px] relative cursor-pointer;
+}
+
+.check-toggle .ball,
+.check-toggle .sun,
+.check-toggle .moon {
+  @apply absolute top-[50%] -translate-y-[50%];
+}
+
+.check-toggle .text {
+  @apply absolute w-max top-[50%] translate-x-[70px] -translate-y-[50%];
+}
+
+.check-toggle .ball {
+  @apply inline-block w-[24px] h-[24px] bg-slate-400 rounded-[50%] left-[2px] z-[10] transition-transform duration-500 ease-in-out;
+}
+
+.check-toggle .sun {
+  @apply left-[5px];
+}
+
+.check-toggle .moon {
+  @apply right-[5px];
+}
+
+#checkbox:checked + .ball {
+  @apply translate-x-[28px] -translate-y-[50%] bg-[#0069d9];
 }
 
 /*
